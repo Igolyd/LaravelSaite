@@ -18,15 +18,18 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        
     ];
+    
 
     /**
      * Register any events for your application.
+     * 
      *
      * @return void
      */
     public function boot()
     {
-        //
+        // event(new Registered($user));
     }
 }
