@@ -32,18 +32,15 @@
                 </button>
                 <nav class="my-2 my-md-0 me-md-3">
                     <a class="p-2 text-dark" href="{{ route('news') }}">Новости</a>
-                    <a class="p-2 text-dark" href="{{ route('forum') }}">Форум</a>
+                    <a class="p-2 text-dark" href="{{ route('setforum') }}">Форум</a>
                     <a class="p-2 text-dark" href="{{ route('contact') }}">Поддержка</a>
                   </nav>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
 
-                    <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
@@ -57,22 +54,11 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="provile" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            <li class="nav-item row">
+                                <img class="img-thumbnail border-0" style="width: 50px; height: 45px; border-radius: 100px; box-shadow: 0 0 5px #666" src="{{ asset('/storage/' .Auth::user()->avatar)}}">
+                                <h5><a id="navbarDropdown" class="nav-link" href="{{ route('setProvile', Auth::user()->name ) }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
+                                </a></h5>
                             </li>
                         @endguest
                     </ul>

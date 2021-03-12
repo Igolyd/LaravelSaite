@@ -1,10 +1,9 @@
 @extends('layouts.app')
 
-@section('title', 'Профиль')
+@section('title', 'Профиль' )
 @section('content')
-<h2>Профиль</h2>
+<h2>Профиль {{ Auth::user()->name }}</h2>
 
-<a class="btn btn-outline-primary" href="{{ route('logout') }}">Выйти из аккаунта</a>
 @if (session('status'))
     <div class="alert alert-success" role="alert">
         {{ session('status') }}
@@ -15,8 +14,20 @@
         {{ session('warning') }}
     </div>
 @endif
- 
- 
+<div class="container-fluid">
+<label class="mt-4" for="image_forum">Фото профиля</label>
+<img class="img-thumbnail border-0 mt-1 ml-1" style="width: 90px; height: 85px; border-radius: 100px; box-shadow: 0 0 5px #666" src="{{ asset('/storage/' .Auth::user()->avatar)}}">
+<p>Почта:</p>
+<h4 class="text-break ml-1">
+    {{Auth::user()->email}}
+</h4>
+<p>{{Auth::user()->created_at}}</p>
+<a href="{{ route('editProvile', Auth::user()->name) }}">
+<button type="submit" class="btn btn-succes">
+    {{ __('Редактировать профиль') }}
+</button>
+</a>
+</div>
 <form method="POST" action="{{ url('logout-others') }}">
     @csrf
     <div class="form-group">
@@ -36,7 +47,7 @@
     </div>
 </form>
 
-    <form method="POST" action="{{ url('logout-self') }}">
+    <form method="POST" action="{{ route('logout-self') }}">
         @csrf
         <div class="form-group">     
             <div class="col-md-6 offset mt-1">

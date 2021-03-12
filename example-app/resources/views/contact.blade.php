@@ -4,17 +4,17 @@
 @section('content')
 <h2>Поддержка</h2>
 
-<form action="{{ route('mobius') }}" method="post">
+<form action="{{ route('subforum') }}" method="post">
 @csrf
 
-<div class="form-group">
+<div class="col-4">
 <label for="typeprob">Введите тему проблемы</label>
-<input type="text" name="typeprob" id="typeprob" placeholder="Тема проблемы" class="form-control mb-2">
+<input type="text" required name="typeprob" id="typeprob" placeholder="Тема проблемы" class="col mb-2">
 </div>
-<div class="form-group">
+<div class="col-8">
 <label for="message">Опишите проблему</label>
-<textarea name="message" id="message" cols="30" rows="10" class="form-control"></textarea>
+<textarea name="message" required id="message" cols="30" rows="10" class="form-control"></textarea>
 </div>
-<button type="submit" class="btn btn-success">Отправить</button>
+<button type="submit" class="btn btn-success mt-2 ml-3">Отправить</button>
 </form>
 @endsection

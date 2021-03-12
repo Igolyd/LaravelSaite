@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/email/verify';
 
     /**
      * Create a new controller instance.
@@ -50,9 +50,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:255' , 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'image_provile' => 'mimes:jpeg,png,jpg,gif,svg|max:240128',
         ]);
     }
 
@@ -70,4 +71,13 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
     }
+    // protected function ProvileUpdate($name,array $data)
+    // {
+    //      User::create([
+    //         'name' => $data['name'],
+    //         'image_provile' => $data['image_provile']->file('image_provile')->store('uploads','public'),
+    //         $name = 'name',
+    //         ]);
+    //         return redirect()->route('setProvile', $name);
+    // }
 }
