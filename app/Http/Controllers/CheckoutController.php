@@ -10,15 +10,12 @@ use App\Models\User;
 use App\Models\MessagePeople;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\Arcticle;
 use App\Http\Requests\MessagePeopleRequest;
 use App\Http\Requests\ForumRequest;
 
 class CheckoutController extends Controller
 {
-    public function imageUpload()
-    {
-        return view('imageUpload');
-    }
   
     public function getProvile(){
         return view('provile');
@@ -87,4 +84,25 @@ class CheckoutController extends Controller
         $forum->save();
         return redirect()->route('oneForum',$id);
     }
+     public function newsupdate()
+    {
+    $arct = new Arcticle;
+    return view('dashboard',['arct'=>$arct->all()->sortByDesc('id')]);
+    }
+    public function articler($id){
+        $arct = new Arcticle;
+        return view('arcticle',['arct'=>$arct->find($id)]);
+    }
+    // public function listprofile(){
+    //     $user = new User();
+    //     return view('listprofile',['user'=>$user->all()->sortByDesc('id')]);
+    // }
+    // public function anotherprofile($name){
+    //     $user = User::where('name', $name)->first();
+    //     if(!$user){
+    //         abort(404);
+    //     }
+    //     return view('another_profile',['user'=>$user->find($name)]);
+
+    // }
 }

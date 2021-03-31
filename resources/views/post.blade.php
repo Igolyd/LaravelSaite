@@ -28,10 +28,11 @@
             @endif
             @endauth
         </div>
+        @auth
         <form action="{{ route('createMessage', ['id'=> $data->id])}}" method="post">
             @csrf
              <div class="container max-w-7xl mx-auto sm:px-6 lg:px-8">
-             <label class="mt-2" for="message">Написать коментарий...</label>
+             <label class="mt-2" for="message">{{_('Write a message...')}}</label>
              <textarea name="message"id="message" cols="30" rows="10" class="form-control @error('message') is-invalid @enderror"></textarea>
              @error('message')
              <div class="alert alert-danger">{{ $message}}</div>
@@ -39,6 +40,15 @@
              <button type="submit" class="btn btn-success mt-2 ml-3">Отправить</button>
              </div>
          </form>
+        @else
+         <span class="">
+             {{_('In order to write a message you need to')}}
+             <a href="{{ route('login') }}" class="text-sm text-gray-700 underline">{{_('Login')}}</a>
+             {{_('/')}}
+             <a href="{{ route('register') }}" class=" text-sm text-gray-700 underline">{{_('Register')}}</a>
+
+         </span>
+        @endauth
         <div>                
             @if (isset($forum))
             @foreach($forum as $del)
@@ -66,13 +76,14 @@
                     </h1>
                     @else
                     <h1 class="break-all">
-                        {{$del->NamePeople}}
-                        </h1>
+                        <h1 class="break-all">
+                            {{$del->NamePeople}}
+                            </h1>
                     @endif
                 @else
                 <h1 class="break-all">
-                {{$del->NamePeople}}
-                </h1>
+                    {{$del->NamePeople}}
+                    </h1>
                 @endif
             <h1 class="text-3xl break-all">
                 {{$del->message}}
